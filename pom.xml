@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Project Info -->
+    <artifactId>streaming-stats</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>streaming-stats</name>
+    <description>operable/streaming-stats parent project POM</description>
+    <url>https://github.com/gwittel/streaming-stats</url>
+
+    <parent>
+        <groupId>software.operable.base</groupId>
+        <artifactId>operable-base</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <inceptionYear>2017</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>gwittel</id>
+            <name>Greg Wittel</name>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/gwittel/streaming-stats.git</connection>
+        <developerConnection>scm:git:git@github.com:gwittel/streaming-stats.git</developerConnection>
+        <url>https://github.com/gwittel/streaming-stats/tree/master</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <!-- Override default base JDK version -->
+        <project.build.targetJdk>9</project.build.targetJdk>
+    </properties>
+
+    <modules>
+        <module>core</module>
+    </modules>
+
+</project>
