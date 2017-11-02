@@ -21,7 +21,19 @@ import software.operable.streamingstats.Aggregator;
 public interface Frequency<T>
         extends Aggregator<T>
 {
+    /**
+     * Get the frequency of the given {@code value}.
+     *
+     * @param value
+     * @return Frequency of the item.
+     */
     long get(T value);
 
+    /**
+     * Merge data from {@code other} into the current aggregator.
+     *
+     * @param other
+     * @return The mutated {@code Frequency<T>} object.
+     */
     Frequency<T> mergeWith(Frequency<T> other);
 }

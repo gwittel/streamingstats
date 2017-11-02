@@ -29,6 +29,9 @@ import static java.util.stream.Collector.Characteristics.CONCURRENT;
 import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
 import static java.util.stream.Collector.Characteristics.UNORDERED;
 
+/**
+ * Helper class to succinctly aggregate and derive various approximate statistical measures.
+ */
 public class Approximators
 {
     /**
@@ -55,7 +58,7 @@ public class Approximators
     }
 
     /**
-     * Aggregate into a cardinality counter, return ultimate cardinality.
+     * Used to collect a stream into a cardinality counter, return estimated number of unique items (cardinality).
      *
      * @param <T> Type of item to aggregate
      * @return Number of unique elements in the stream.

@@ -18,13 +18,25 @@ package software.operable.streamingstats.aggregators;
 import java.util.function.Consumer;
 
 /**
- * Track number of unique items.
+ * Track number of unique items across consumed input.
+ *
  * @param <T>
  */
 public interface Cardinality<T>
         extends Consumer<T>
 {
+    /**
+     * Get the number of unique items added/accepted.
+     *
+     * @return
+     */
     long get();
 
+    /**
+     * Merge data from {@code other} into the current aggregator.
+     *
+     * @param other
+     * @return The mutated {@code Cardinality<T>} object
+     */
     Cardinality<T> mergeWith(Cardinality<T> other);
 }

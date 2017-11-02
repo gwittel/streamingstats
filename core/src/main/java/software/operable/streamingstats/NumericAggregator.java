@@ -19,6 +19,11 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 
+/**
+ * Generic number aggregator.
+ *
+ * Type support is currently limited by the currently available primitive friendly consumers.
+ */
 public interface NumericAggregator
         extends IntConsumer, LongConsumer, DoubleConsumer
 {

@@ -26,8 +26,20 @@ public interface HashedFrequency<T>
         extends Frequency<T>
 {
 
+    /**
+     * Add a pre-hashed value into the frequency aggregator data structure.
+     *
+     * @param hashedValue Value resulting from the implemented {@link #hash(T)} function.
+     * @param count Amount to increment frequency by.
+     */
     void addHashed(long hashedValue, long count);
 
+    /**
+     * Retrieve the frequency of a hashed value
+     *
+     * @param hashedValue Value resulting from the implemented {@link #hash(T)} function.
+     * @return Frequency of the {@code hashedValue}
+     */
     long getHashed(long hashedValue);
 
     /**
@@ -42,6 +54,8 @@ public interface HashedFrequency<T>
     }
 
     /**
+     * Generic object hash to long method.
+     *
      * Relies on inbuilt Object -> bytes -> hash(x) handlers
      *
      * @param value

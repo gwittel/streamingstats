@@ -22,11 +22,23 @@ import java.util.function.Consumer;
 public interface Aggregator<T>
         extends Consumer<T>
 {
+    /**
+     * Add another item into this aggregator.
+     *
+     * Alias for {@code accept}
+     *
+     * @param item
+     */
     default void add(T item)
     {
         accept(item);
     }
 
+    /**
+     * Add multiple values into this aggregator.
+     *
+     * @param values
+     */
     default void addAll(Collection<T> values)
     {
         for (T v : values) {
@@ -34,6 +46,11 @@ public interface Aggregator<T>
         }
     }
 
+    /**
+     * Add multiple values into this aggregator.
+     *
+     * @param values
+     */
     default void addAll(T... values)
     {
         for (T v : values) {

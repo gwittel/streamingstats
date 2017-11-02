@@ -40,9 +40,9 @@ public interface NumericDistribution
     double quantile(double quantile);
 
     /**
-     * Merge another quantile INTO the current instance
+     * Merge another NumericDistribution INTO the current instance
      * @param other
-     * @return
+     * @return The mutated {@code NumericDistribution} object
      */
     NumericDistribution mergeWith(NumericDistribution other);
 }

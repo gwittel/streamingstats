@@ -39,7 +39,7 @@ public class HashedFrequencyImpl<T>
 
     private static final int SEED = 1;
 
-    private volatile CountMinSketch instance;
+    private volatile CountMinSketch instance; // volatile due to limitation in how CMS objects are merged in the implementation library
 
     HashedFrequencyImpl()
     {
