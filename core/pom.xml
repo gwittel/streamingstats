@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Project Info -->
+    <artifactId>core</artifactId>
+    <packaging>jar</packaging>
+    <name>streaming-stats/core</name>
+    <description>operable/streaming-stats core components</description>
+    <url>https://github.com/gwittel/streaming-stats</url>
+
+    <parent>
+        <groupId>software.operable.base</groupId>
+        <artifactId>streaming-stats</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <dep.tdigest.version>3.2</dep.tdigest.version>
+        <dep.streamlib.version>2.9.5</dep.streamlib.version>
+    </properties>
+
+    <dependencies>
+        <!-- TODO Decide which JEP-266 implmementation works best -->
+        <!-- http://www.reactive-streams.org/announce-1.0.0 -->
+
+        <!-- JEP-266 interfaces for Java 8 -->
+        <!--
+        <dependency>
+            <groupId>org.reactivestreams</groupId>
+            <artifactId>reactive-streams</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        -->
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <!-- Stats implementations -->
+        <dependency>
+            <groupId>com.tdunning</groupId>
+            <artifactId>t-digest</artifactId>
+            <version>${dep.tdigest.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.clearspring.analytics</groupId>
+            <artifactId>stream</artifactId>
+            <version>${dep.streamlib.version}</version>
+        </dependency>
+
+    </dependencies>
+</project>
