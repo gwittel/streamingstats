@@ -13,7 +13,7 @@
     <url>https://github.com/gwittel/streaming-stats</url>
 
     <parent>
-        <groupId>software.operable.base</groupId>
+        <groupId>software.operable</groupId>
         <artifactId>operable-base</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
