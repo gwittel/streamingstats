@@ -18,6 +18,9 @@ package software.operable.streamingstats;
 import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 /**
  * Generic number aggregator.
@@ -61,5 +64,20 @@ public interface NumericAggregator
         for (double v : values) {
             accept(v);
         }
+    }
+
+    default void addAll(IntStream intStream)
+    {
+        intStream.forEach(this::accept);
+    }
+
+    default void addAll(LongStream longStream)
+    {
+        longStream.forEach(this::accept);
+    }
+
+    default void addAll(DoubleStream doubleStream)
+    {
+        doubleStream.forEach(this::accept);
     }
 }

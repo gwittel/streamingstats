@@ -18,7 +18,16 @@ package software.operable.streamingstats;
 
 import java.util.Collection;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
+/**
+ * Baseline aggregator.
+ *
+ * Note that nullability is not explicitly required.  It is currently up
+ * to the specific implementation.  This might change in the near future.
+ *
+ * @param <T>
+ */
 public interface Aggregator<T>
         extends Consumer<T>
 {
@@ -56,5 +65,15 @@ public interface Aggregator<T>
         for (T v : values) {
             add(v);
         }
+    }
+
+    /**
+     * Consume stream into aggregator
+     *
+     * @param stream
+     */
+    default void addAll(Stream<T> stream)
+    {
+        stream.forEach(this::accept);
     }
 }

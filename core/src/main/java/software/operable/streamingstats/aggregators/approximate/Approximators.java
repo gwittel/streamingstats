@@ -52,7 +52,7 @@ public class Approximators
      * @param <T>
      * @return
      */
-    public static <T> Long cardinality(Stream<T> stream)
+    public static <T> Long cardinalityOf(Stream<T> stream)
     {
         return stream.collect(cardinalityCollector());
     }
@@ -92,7 +92,7 @@ public class Approximators
      * @param <T>
      * @return
      */
-    public static <T> Frequency<T> frequency(Stream<T> stream)
+    public static <T> Frequency<T> frequencyOf(Stream<T> stream)
     {
         return stream.collect(frequencyCollector());
     }
@@ -128,7 +128,7 @@ public class Approximators
      * There's no "stream friendly" equivalent of Number.
      */
 
-    public static NumericDistribution distribution(IntStream intStream)
+    public static NumericDistribution distributionOf(IntStream intStream)
     {
         return intStream.collect(
                 Approximators::distribution,
@@ -137,7 +137,7 @@ public class Approximators
         );
     }
 
-    public static NumericDistribution distribution(LongStream longStream)
+    public static NumericDistribution distributionOf(LongStream longStream)
     {
         return longStream.collect(
                 Approximators::distribution,
@@ -146,7 +146,7 @@ public class Approximators
         );
     }
 
-    public static NumericDistribution distribution(DoubleStream doubleStream)
+    public static NumericDistribution distributionOf(DoubleStream doubleStream)
     {
         return doubleStream.collect(
                 Approximators::distribution,

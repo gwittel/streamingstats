@@ -15,7 +15,7 @@
  */
 package software.operable.streamingstats.aggregators;
 
-import java.util.function.Consumer;
+import software.operable.streamingstats.Aggregator;
 
 /**
  * Track number of unique items across consumed input.
@@ -23,7 +23,7 @@ import java.util.function.Consumer;
  * @param <T>
  */
 public interface Cardinality<T>
-        extends Consumer<T>
+        extends Aggregator<T>
 {
     /**
      * Get the number of unique items added/accepted.

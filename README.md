@@ -49,3 +49,5 @@ When using these data structures, there are various tradeoffs to be made.  Some 
     ```
 2. Bring in Java 9 JEP-266 for simplified pub/sub model
 3. Consider removing unnecessary abstractions and adopt different stats libs like `airlift/stats` (at cost of more dependencies).
+4. Change `add` type operations to be chainable.
+5. Decide if `Aggregator` methods must or must not tolerate null inputs.

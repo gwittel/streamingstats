@@ -71,7 +71,7 @@ public class NumericDistributionImpl
     public NumericDistribution mergeWith(NumericDistribution other)
     {
         requireNonNull(other, "other is null");
-        checkArgument(other instanceof NumericDistribution, "other is not a NumericDistribution");
+        checkArgument(other instanceof NumericDistributionImpl, "other is not a NumericDistribution");
         checkArgument(((NumericDistributionImpl) other).instance instanceof TDigest, "other does not use the same underlying implementation");
         instance.add(((NumericDistributionImpl) other).instance);
 
