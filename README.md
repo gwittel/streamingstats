@@ -1,5 +1,25 @@
 # Description
 
+The main goal of this project is to simplify counting things.  In many cases we want to gather various
+statistics on the same series of items.
+
+# Status
+
+Extremely early.  Likely that large things will change including breaking API changes.
+
+This is a side project and my time is limited.
+
+## Rough Feature Roadmap
+
+1. Incorporate more helpers to aggregate multiple types of statistics (likely a separate module using RX / JEP-266).
+   1. Simple stream accumulation to output.
+   2. Time windowed emission to subscribers.
+2. Algorithms
+   1. Refine selection/use of underlying implementations.
+   2. Add probabilistic TopK.
+   3. Expose parameter selection based on expected input scale.
+3. Refactor to drop Java 9 requirement for some features.  Reactive features driven by JEP-266 might come in through a separate sub module.
+
 # Goals
 
 The main goal of this project is to simplify counting things.  In many cases we want to gather various
@@ -26,15 +46,22 @@ When using these data structures, there are various tradeoffs to be made.  Some 
   * Possibly higher compute cost to add elements.
   * Ability to combine multiple estimators (e.g. two HyperLogLog structures) is restricted.
   
-# Target Usage Pattern
+# Target Usage Patterns
 
 ```java
-// TODO Document sample usage
+// Simple - Full Stream Consumption
+long estimatedUniqueItems = Approximators.cardinalityOf(someStream)
+
+Frequency<String> stringFreq = Approximators.frequencyOf(someStringStream);
+long estimatedHelloCount = stringFreq.get("hello");
+
+NumericDistribution distribution = Approximators.distributionOf(someNumberStream);
+double median = distribution.quantile(0.5);
 ```
 
 # TODO
 
-1. Integrate stream processing helpers like combiners where aggregation output type clear (e.g. cardinality).
+- [x] Integrate stream processing helpers like combiners where aggregation output type clear (e.g. cardinality).
     ```java 
     // Cardinality with finisher
     Collectors.of(
@@ -47,7 +74,15 @@ When using these data structures, there are various tradeoffs to be made.  Some 
     
     // Quantile -- requires fixed quantile or identity finisher
     ```
-2. Bring in Java 9 JEP-266 for simplified pub/sub model
-3. Consider removing unnecessary abstractions and adopt different stats libs like `airlift/stats` (at cost of more dependencies).
-4. Change `add` type operations to be chainable.
-5. Decide if `Aggregator` methods must or must not tolerate null inputs.
+- [ ] Cleanup and push to Maven Central
+- [ ] Bring in Java 9 JEP-266 for simplified pub/sub model
+- [ ] Consider removing unnecessary abstractions and adopt different stats libs like `airlift/stats` (at cost of more dependencies).
+- [ ] Change `add` type operations to be chainable.
+- [ ] Decide if `Aggregator` methods must or must not tolerate null inputs.
+
+
+# Contributing
+
+Nothing much yet.  Pull requests welcome.
+
+Please format code based on code format from [airlift/codestyle](https://github.com/airlift/codestyle)
