@@ -45,7 +45,7 @@
     <properties>
         <!-- Override default base JDK version -->
 
-        <project.build.targetJdk>9</project.build.targetJdk>
+        <project.build.targetJdk>1.8</project.build.targetJdk>
         <!-- The following are broken due to ASM not handling Java 9 -->
         <!-- See https://issues.apache.org/jira/browse/MDEP-559 -->
         <op.check.skip-dependency>true</op.check.skip-dependency>
