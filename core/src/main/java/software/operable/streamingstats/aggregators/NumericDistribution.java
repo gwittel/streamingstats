@@ -18,7 +18,7 @@ package software.operable.streamingstats.aggregators;
 import software.operable.streamingstats.NumericAggregator;
 
 /**
- * Track distribution of elements and retrieve items by quantile.
+ * Track distribution of numeric elements and retrieve items by quantile.
  */
 public interface NumericDistribution
         extends NumericAggregator

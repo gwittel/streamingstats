@@ -18,6 +18,10 @@ package software.operable.streamingstats.aggregators;
 
 import software.operable.streamingstats.Aggregator;
 
+/**
+ * Track frequency of items within consumed input.
+ * @param <T> Type of item to track
+ */
 public interface Frequency<T>
         extends Aggregator<T>
 {

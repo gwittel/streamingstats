@@ -30,7 +30,7 @@ import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
 import static java.util.stream.Collector.Characteristics.UNORDERED;
 
 /**
- * Helper class to succinctly aggregate and derive various approximate statistical measures.
+ * Factory class to succinctly create aggregators and derive various approximate statistical measures.
  */
 public class Approximators
 {
@@ -42,7 +42,7 @@ public class Approximators
      */
     public static <T> Cardinality<T> cardinality()
     {
-        return CardinalityImpl.create();
+        return ApproximateCardinality.create();
     }
 
     /**

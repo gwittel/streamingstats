@@ -25,7 +25,7 @@ import software.operable.streamingstats.aggregators.Cardinality;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
 
-public class CardinalityImpl<T>
+public class ApproximateCardinality<T>
         implements Cardinality<T>
 {
 
@@ -33,14 +33,14 @@ public class CardinalityImpl<T>
     // Good for having large numbers of HLLs due to reduced object creation overhead
     private volatile ICardinality delegate;
 
-    CardinalityImpl()
+    ApproximateCardinality()
     {
         this.delegate = defaultHll();
     }
 
-    public static <T> CardinalityImpl<T> create()
+    public static <T> ApproximateCardinality<T> create()
     {
-        return new CardinalityImpl<>();
+        return new ApproximateCardinality<>();
     }
 
     @Override
@@ -53,10 +53,10 @@ public class CardinalityImpl<T>
     public Cardinality<T> mergeWith(Cardinality<T> other)
     {
         requireNonNull(other, "other is null");
-        checkArgument(other instanceof CardinalityImpl, "Cannot merge Cardinality estimators of differing types");
+        checkArgument(other instanceof ApproximateCardinality, "Cannot merge Cardinality estimators of differing types");
 
         try {
-            this.delegate = delegate.merge(((CardinalityImpl) other).delegate);
+            this.delegate = delegate.merge(((ApproximateCardinality) other).delegate);
         }
         catch (CardinalityMergeException e) {
             throw new IllegalArgumentException("Problem merging estimators", e);

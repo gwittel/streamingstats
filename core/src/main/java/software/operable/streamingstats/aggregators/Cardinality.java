@@ -20,7 +20,7 @@ import software.operable.streamingstats.Aggregator;
 /**
  * Track number of unique items across consumed input.
  *
- * @param <T>
+ * @param <T> Type of item to track.
  */
 public interface Cardinality<T>
         extends Aggregator<T>

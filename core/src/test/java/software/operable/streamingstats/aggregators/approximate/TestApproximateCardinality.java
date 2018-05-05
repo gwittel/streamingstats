@@ -24,20 +24,20 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withinPercentage;
 
-public class TestCardinalityImpl
+public class TestApproximateCardinality
 {
     @Test(expectedExceptions = NullPointerException.class)
     public void testMergeWithNull()
             throws Exception
     {
-        CardinalityImpl.<String>create().mergeWith(null);
+        ApproximateCardinality.<String>create().mergeWith(null);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testMergeWithIncompatibleImplementation()
             throws Exception
     {
-        CardinalityImpl.<String>create().mergeWith(dummyCardinality());
+        ApproximateCardinality.<String>create().mergeWith(dummyCardinality());
     }
 
     @Test
@@ -45,10 +45,10 @@ public class TestCardinalityImpl
             throws Exception
     {
         // This feels more like we're testing the cardinality implementation vs the merging
-        CardinalityImpl<Integer> card1 = CardinalityImpl.create();
+        ApproximateCardinality<Integer> card1 = ApproximateCardinality.create();
         IntStream.rangeClosed(1, 100000).forEach(card1::accept);
 
-        CardinalityImpl<Integer> card2 = CardinalityImpl.create();
+        ApproximateCardinality<Integer> card2 = ApproximateCardinality.create();
         IntStream.rangeClosed(100001, 200001).forEach(card2::accept);
 
         assertThat(card1.get()).isCloseTo(card2.get(), withinPercentage(2));
