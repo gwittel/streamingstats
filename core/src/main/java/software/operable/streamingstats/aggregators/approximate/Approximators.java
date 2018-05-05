@@ -82,7 +82,7 @@ public class Approximators
      */
     public static <T> Frequency<T> frequency()
     {
-        return HashedFrequencyImpl.create();
+        return ApproximateFrequency.create();
     }
 
     /**
@@ -120,7 +120,7 @@ public class Approximators
      */
     public static NumericDistribution distribution()
     {
-        return NumericDistributionImpl.create();
+        return ApproximateDistribution.create();
     }
 
     /*

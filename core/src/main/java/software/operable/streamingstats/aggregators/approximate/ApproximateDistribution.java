@@ -22,19 +22,19 @@ import software.operable.streamingstats.aggregators.NumericDistribution;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
 
-public class NumericDistributionImpl
+public class ApproximateDistribution
         implements NumericDistribution
 {
     private final TDigest instance;
 
-    NumericDistributionImpl()
+    ApproximateDistribution()
     {
         this.instance = TDigest.createDigest(100);
     }
 
-    public static NumericDistributionImpl create()
+    public static ApproximateDistribution create()
     {
-        return new NumericDistributionImpl();
+        return new ApproximateDistribution();
     }
 
     @Override
@@ -71,9 +71,9 @@ public class NumericDistributionImpl
     public NumericDistribution mergeWith(NumericDistribution other)
     {
         requireNonNull(other, "other is null");
-        checkArgument(other instanceof NumericDistributionImpl, "other is not a NumericDistribution");
-        checkArgument(((NumericDistributionImpl) other).instance instanceof TDigest, "other does not use the same underlying implementation");
-        instance.add(((NumericDistributionImpl) other).instance);
+        checkArgument(other instanceof ApproximateDistribution, "other is not a NumericDistribution");
+        checkArgument(((ApproximateDistribution) other).instance instanceof TDigest, "other does not use the same underlying implementation");
+        instance.add(((ApproximateDistribution) other).instance);
 
         return this;
     }

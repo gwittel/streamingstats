@@ -24,7 +24,7 @@ import software.operable.streamingstats.aggregators.Frequency;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
 
-public class HashedFrequencyImpl<T>
+public class ApproximateFrequency<T>
         implements HashedFrequency<T>
 {
     /**
@@ -41,14 +41,14 @@ public class HashedFrequencyImpl<T>
 
     private volatile CountMinSketch instance; // volatile due to limitation in how CMS objects are merged in the implementation library
 
-    HashedFrequencyImpl()
+    ApproximateFrequency()
     {
         this.instance = new CountMinSketch(EPSILON, CONFIDENCE, SEED);
     }
 
-    public static <T> HashedFrequencyImpl<T> create()
+    public static <T> ApproximateFrequency<T> create()
     {
-        return new HashedFrequencyImpl();
+        return new ApproximateFrequency();
     }
 
     @Override
@@ -67,12 +67,12 @@ public class HashedFrequencyImpl<T>
     public Frequency<T> mergeWith(Frequency<T> other)
     {
         requireNonNull(other, "other is null");
-        checkArgument(other instanceof HashedFrequencyImpl, "Cannot merge frequency estimators of differing types.");
+        checkArgument(other instanceof ApproximateFrequency, "Cannot merge frequency estimators of differing types.");
 
         // The underlying implementation won't let you merge into one for some reason
         // TODO Will an alternate implementation resolve this inconsistency?
         try {
-            this.instance = CountMinSketch.merge(instance, ((HashedFrequencyImpl) other).instance);
+            this.instance = CountMinSketch.merge(instance, ((ApproximateFrequency) other).instance);
         }
         catch (FrequencyMergeException e) {
             throw new IllegalArgumentException("Problem merging estimators", e);

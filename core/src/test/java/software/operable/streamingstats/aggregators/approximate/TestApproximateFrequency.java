@@ -24,20 +24,20 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withinPercentage;
 
-public class TestHashedFrequencyImpl
+public class TestApproximateFrequency
 {
     @Test(expectedExceptions = NullPointerException.class)
     public void testMergeWithNull()
             throws Exception
     {
-        HashedFrequencyImpl.<String>create().mergeWith(null);
+        ApproximateFrequency.<String>create().mergeWith(null);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testMergeWithIncompatibleImplementation()
             throws Exception
     {
-        HashedFrequencyImpl.<String>create().mergeWith(dummyHashedFrequency());
+        ApproximateFrequency.<String>create().mergeWith(dummyHashedFrequency());
     }
 
     @Test
@@ -47,10 +47,10 @@ public class TestHashedFrequencyImpl
         Stream<Integer> ones = Stream.generate(() -> 1);
         Stream<Integer> twos = Stream.generate(() -> 2);
 
-        HashedFrequencyImpl<Integer> freq1 = HashedFrequencyImpl.create();
+        ApproximateFrequency<Integer> freq1 = ApproximateFrequency.create();
         freq1.addAll(ones.limit(1000));
 
-        HashedFrequencyImpl<Integer> freq2 = HashedFrequencyImpl.create();
+        ApproximateFrequency<Integer> freq2 = ApproximateFrequency.create();
         freq2.addAll(twos.limit(5000));
 
         freq1.mergeWith(freq2);

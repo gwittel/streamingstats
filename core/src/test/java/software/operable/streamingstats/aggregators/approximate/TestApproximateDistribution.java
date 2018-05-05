@@ -21,20 +21,20 @@ import software.operable.streamingstats.aggregators.NumericDistribution;
 
 import static org.testng.Assert.assertEquals;
 
-public class TestNumericDistributionImpl
+public class TestApproximateDistribution
 {
     @Test(expectedExceptions = NullPointerException.class)
     public void testMergeWithNull()
             throws Exception
     {
-        NumericDistributionImpl.create().mergeWith(null);
+        ApproximateDistribution.create().mergeWith(null);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testMergeWithIncompatibleImplementation()
             throws Exception
     {
-        NumericDistributionImpl.create()
+        ApproximateDistribution.create()
                 .mergeWith(dummyNumericDistribution());
     }
 
@@ -44,10 +44,10 @@ public class TestNumericDistributionImpl
     {
         // Other than making sure merge works, is there anything really useful here?
 
-        NumericDistribution dist1 = NumericDistributionImpl.create();
+        NumericDistribution dist1 = ApproximateDistribution.create();
         dist1.addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-        NumericDistribution dist2 = NumericDistributionImpl.create();
+        NumericDistribution dist2 = ApproximateDistribution.create();
         dist2.addAll(11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
 
         assertEquals(dist1.quantile(0.5), 5, 1);
