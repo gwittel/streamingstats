@@ -19,6 +19,7 @@ import com.google.common.annotations.Beta;
 import software.operable.streamingstats.aggregators.Cardinality;
 import software.operable.streamingstats.aggregators.Frequency;
 import software.operable.streamingstats.aggregators.NumericDistribution;
+import software.operable.streamingstats.aggregators.Summary;
 
 import java.util.stream.Collector;
 import java.util.stream.DoubleStream;
@@ -40,7 +41,6 @@ public class Approximators
      * Get default approximate cardinality (unique) aggregator.
      *
      * @param <T> Type of item to aggregate
-     * @return
      */
     public static <T> Cardinality<T> cardinality()
     {
@@ -49,10 +49,6 @@ public class Approximators
 
     /**
      * Calculate number of unique items in a stream.
-     *
-     * @param stream
-     * @param <T>
-     * @return
      */
     public static <T> Long cardinalityOf(Stream<T> stream)
     {
@@ -80,7 +76,6 @@ public class Approximators
      * Get default item frequency aggregator.
      *
      * @param <T> Type of item to count.
-     * @return
      */
     public static <T> Frequency<T> frequency()
     {
@@ -89,10 +84,6 @@ public class Approximators
 
     /**
      * Collect item frequency information over a stream.
-     *
-     * @param stream
-     * @param <T>
-     * @return
      */
     public static <T> Frequency<T> frequencyOf(Stream<T> stream)
     {
@@ -116,9 +107,39 @@ public class Approximators
     }
 
     /**
-     * Get default numeric item distribution (percentile) aggregator.
+     * Get the default approximate summary aggregator
      *
+     * @param <T> Type of item to track.
+     * @return Summary aggregator
+     */
+    public static <T> Summary<T> summary()
+    {
+        return ApproximateSummary.create();
+    }
+
+    /**
+     * Get a summary of the supplied finite stream.
+     * @param stream
+     * @param <T>
      * @return
+     */
+    public static <T> Summary<T> summaryOf(Stream<T> stream)
+    {
+        return stream.collect(summaryCollector());
+    }
+
+    public static <T> Collector<T, Summary<T>, Summary<T>> summaryCollector()
+    {
+        return Collector.of(
+                Approximators::summary,
+                Summary::accept,
+                Summary::mergeWith,
+                IDENTITY_FINISH, UNORDERED, CONCURRENT
+        );
+    }
+
+    /**
+     * Get default numeric item distribution (percentile) aggregator.
      */
     public static NumericDistribution distribution()
     {
