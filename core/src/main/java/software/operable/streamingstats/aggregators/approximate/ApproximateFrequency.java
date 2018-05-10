@@ -24,6 +24,11 @@ import software.operable.streamingstats.aggregators.Frequency;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
 
+/**
+ * This tracks the approximate frequency of items inserted within a bound percent error.
+ * <p>
+ * Unearneath it is using a Count-min-sketch algorithm to do so.
+ */
 public class ApproximateFrequency<T>
         implements HashedFrequency<T>
 {
@@ -48,7 +53,7 @@ public class ApproximateFrequency<T>
 
     public static <T> ApproximateFrequency<T> create()
     {
-        return new ApproximateFrequency();
+        return new ApproximateFrequency<>();
     }
 
     @Override

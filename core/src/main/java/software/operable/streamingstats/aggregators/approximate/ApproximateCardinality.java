@@ -1,12 +1,12 @@
 /**
  * Copyright 2017 Greg Wittel
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,6 +25,14 @@ import software.operable.streamingstats.aggregators.Cardinality;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
 
+/**
+ * This tracks the approximate set cardinality (number of unique items).
+ *
+ * Underneath, it is using a HyperLogLog counter to track the data.  It will return the number
+ * of unique items inserted within a bound percent error.
+ *
+ * @param <T>
+ */
 public class ApproximateCardinality<T>
         implements Cardinality<T>
 {
