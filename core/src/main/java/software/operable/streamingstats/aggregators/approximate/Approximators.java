@@ -15,6 +15,7 @@
  */
 package software.operable.streamingstats.aggregators.approximate;
 
+import com.google.common.annotations.Beta;
 import software.operable.streamingstats.aggregators.Cardinality;
 import software.operable.streamingstats.aggregators.Frequency;
 import software.operable.streamingstats.aggregators.NumericDistribution;
@@ -32,6 +33,7 @@ import static java.util.stream.Collector.Characteristics.UNORDERED;
 /**
  * Factory class to succinctly create aggregators and derive various approximate statistical measures.
  */
+@Beta
 public class Approximators
 {
     /**

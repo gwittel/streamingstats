@@ -16,27 +16,28 @@
 
 package software.operable.streamingstats;
 
+import com.google.common.annotations.Beta;
+
 import java.util.Collection;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
  * Baseline aggregator.
- *
+ * <p>
  * Note that nullability is not explicitly required.  It is currently up
  * to the specific implementation.  This might change in the near future.
  *
- * @param <T>
+ * @param <T> Type of item to track.
  */
+@Beta
 public interface Aggregator<T>
         extends Consumer<T>
 {
     /**
      * Add another item into this aggregator.
-     *
+     * <p>
      * Alias for {@code accept}
-     *
-     * @param item
      */
     default void add(T item)
     {
@@ -45,8 +46,6 @@ public interface Aggregator<T>
 
     /**
      * Add multiple values into this aggregator.
-     *
-     * @param values
      */
     default void addAll(Collection<T> values)
     {
@@ -57,8 +56,6 @@ public interface Aggregator<T>
 
     /**
      * Add multiple values into this aggregator.
-     *
-     * @param values
      */
     default void addAll(T... values)
     {
@@ -69,8 +66,6 @@ public interface Aggregator<T>
 
     /**
      * Consume stream into aggregator
-     *
-     * @param stream
      */
     default void addAll(Stream<T> stream)
     {
