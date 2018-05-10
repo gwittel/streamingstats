@@ -1,24 +1,7 @@
 # Description
 
 The main goal of this project is to simplify counting things.  In many cases we want to gather various
-statistics on the same series of items.
-
-# Status
-
-Extremely early.  Likely that large things will change including breaking API changes.
-
-This is a side project and my time is limited.
-
-## Rough Feature Roadmap
-
-1. Incorporate more helpers to aggregate multiple types of statistics (likely a separate module using RX / JEP-266).
-   1. Simple stream accumulation to output.
-   2. Time windowed emission to subscribers.
-2. Algorithms
-   1. Refine selection/use of underlying implementations.
-   2. Add probabilistic TopK.
-   3. Expose parameter selection based on expected input scale.
-3. Refactor to drop Java 9 requirement for some features.  Reactive features driven by JEP-266 might come in through a separate sub module.
+statistics on the same series of items where such series are too large to hold in memory.
 
 # Goals
 
@@ -45,6 +28,7 @@ When using these data structures, there are various tradeoffs to be made.  Some 
   * An estimated (possibly bounded) error rate.
   * Possibly higher compute cost to add elements.
   * Ability to combine multiple estimators (e.g. two HyperLogLog structures) is restricted.
+
   
 # Target Usage Patterns
 
@@ -58,6 +42,24 @@ long estimatedHelloCount = stringFreq.get("hello");
 NumericDistribution distribution = Approximators.distributionOf(someNumberStream);
 double median = distribution.quantile(0.5);
 ```
+
+
+# Status
+
+Extremely early.  Likely that large things will change including breaking API changes.
+
+This is a side project and my time is limited.
+
+## Rough Feature Roadmap
+
+1. Incorporate more helpers to aggregate multiple types of statistics (likely a separate module using RX / JEP-266).
+   1. Simple stream accumulation to output.
+   2. Time windowed emission to subscribers.
+2. Algorithms
+   1. Refine selection/use of underlying implementations.
+   2. Add probabilistic TopK.
+   3. Expose parameter selection based on expected input scale.
+3. Refactor to drop Java 9 requirement for some features.  Reactive features driven by JEP-266 might come in through a separate sub module.
 
 # TODO
 
@@ -80,6 +82,11 @@ double median = distribution.quantile(0.5);
 - [ ] Change `add` type operations to be chainable.
 - [ ] Decide if `Aggregator` methods must or must not tolerate null inputs.
 
+# Known Issues
+
+- The `mergeWith` functionality needs thinking.  What's the point of having a merge on an interface when you can't mingle/merge implementations?  Feels hacky.
+- Thread safety.  We need to go through implementations and verify safety (or not) and mark limitations accordingly.
+    - Based on this we'll need to update the flags to the collectors in the `Approximators` class.
 
 # Contributing
 
