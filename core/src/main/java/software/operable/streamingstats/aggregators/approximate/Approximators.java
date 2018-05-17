@@ -19,6 +19,7 @@ import com.google.common.annotations.Beta;
 import software.operable.streamingstats.aggregators.Cardinality;
 import software.operable.streamingstats.aggregators.Frequency;
 import software.operable.streamingstats.aggregators.NumericDistribution;
+import software.operable.streamingstats.aggregators.NumericSummary;
 import software.operable.streamingstats.aggregators.Summary;
 
 import java.util.stream.Collector;
@@ -119,9 +120,6 @@ public class Approximators
 
     /**
      * Get a summary of the supplied finite stream.
-     * @param stream
-     * @param <T>
-     * @return
      */
     public static <T> Summary<T> summaryOf(Stream<T> stream)
     {
@@ -212,4 +210,46 @@ public class Approximators
                 IDENTITY_FINISH, UNORDERED, CONCURRENT
         );
     }
+
+    public static NumericSummary numericSummary()
+    {
+        return ApproximateNumericSummary.create();
+    }
+
+    /**
+     * Get a summary of the supplied finite int stream.
+     */
+    public static NumericSummary numericSummaryOf(IntStream stream)
+    {
+        return stream.collect(
+                Approximators::numericSummary,
+                NumericSummaryConsumer.get(),
+                NumericSummary::mergeWith
+        );
+    }
+
+    /**
+     * Get a summary of the supplied finite long stream.
+     */
+    public static NumericSummary numericSummaryOf(LongStream stream)
+    {
+        return stream.collect(
+                Approximators::numericSummary,
+                NumericSummaryConsumer.get(),
+                NumericSummary::mergeWith
+        );
+    }
+
+    /**
+     * Get a summary of the supplied finite double stream.
+     */
+    public static NumericSummary numericSummaryOf(DoubleStream stream)
+    {
+        return stream.collect(
+                Approximators::numericSummary,
+                NumericSummaryConsumer.get(),
+                NumericSummary::mergeWith
+        );
+    }
+
 }
