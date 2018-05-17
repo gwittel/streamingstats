@@ -15,7 +15,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class ApproximateSummary<T> implements Summary<T>
 {
-    private int size;
+    private long size;
 
     protected final Cardinality<T> approximateCardinality;
     protected final Frequency<T> approximateFrequency;

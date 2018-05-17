@@ -1,5 +1,6 @@
 package software.operable.streamingstats.aggregators;
 
+import com.google.common.annotations.Beta;
 import software.operable.streamingstats.Aggregator;
 
 /**
@@ -7,6 +8,7 @@ import software.operable.streamingstats.Aggregator;
  *
  * @param <T> Type of items to track.
  */
+@Beta
 public interface Summary<T> extends Aggregator<T>
 {
     /**
@@ -27,9 +29,9 @@ public interface Summary<T> extends Aggregator<T>
     long frequency(T value);
 
     /**
-     * Merge data from {@code other} into the current asummaryggregator.
+     * Merge data from {@code other} into the current Summary aggregator.
      *
-     * @return The mutated {@code Summary<T>} object
+     * @return The mutated {@link Summary} object
      */
     Summary<T> mergeWith(Summary<T> other);
 }
