@@ -81,6 +81,7 @@ This is a side project and my time is limited.
 - [ ] Consider removing unnecessary abstractions and adopt different stats libs like `airlift/stats` (at cost of more dependencies).
 - [ ] Change `add` type operations to be chainable.
 - [ ] Decide if `Aggregator` methods must or must not tolerate null inputs.
+- [ ] Consider alternate HLL - http://dsiutils.di.unimi.it/ . Good for having large numbers of HLLs due to reduced object creation overhead
 
 # Known Issues
 

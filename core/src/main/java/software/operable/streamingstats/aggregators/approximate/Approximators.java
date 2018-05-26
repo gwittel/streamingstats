@@ -1,6 +1,8 @@
 package software.operable.streamingstats.aggregators.approximate;
 
+import com.clearspring.analytics.stream.cardinality.HyperLogLogPlus;
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.VisibleForTesting;
 import software.operable.streamingstats.aggregators.Cardinality;
 import software.operable.streamingstats.aggregators.Frequency;
 import software.operable.streamingstats.aggregators.NumericDistribution;
@@ -237,4 +239,12 @@ public class Approximators
         );
     }
 
+    /**
+     * Get the default internal HLL Implementation
+     */
+    @VisibleForTesting
+    static HyperLogLogPlus defaultHll()
+    {
+        return new HyperLogLogPlus(14, 32);
+    }
 }

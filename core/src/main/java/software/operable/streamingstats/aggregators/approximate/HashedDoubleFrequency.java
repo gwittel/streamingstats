@@ -2,16 +2,14 @@ package software.operable.streamingstats.aggregators.approximate;
 
 import com.clearspring.analytics.hash.MurmurHash;
 import com.google.common.annotations.Beta;
-import software.operable.streamingstats.aggregators.Frequency;
+import software.operable.streamingstats.aggregators.DoubleFrequency;
 
 /**
  * Interface for hash based item frequency estimators
- *
- * @param <T> Type of item to track.
  */
 @Beta
-public interface HashedFrequency<T>
-        extends Frequency<T>, BaseHashedFrequency
+public interface HashedDoubleFrequency
+        extends DoubleFrequency, BaseHashedFrequency
 {
     /**
      * Take in, hash, then record item.
@@ -19,7 +17,7 @@ public interface HashedFrequency<T>
      * @param t item to add
      */
     @Override
-    default void accept(T t)
+    default void accept(double t)
     {
         addHashed(hash(t), 1);
     }
@@ -27,18 +25,18 @@ public interface HashedFrequency<T>
     /**
      * Generic object hash to long method.
      * <p>
-     * Relies on inbuilt Object -> bytes -> hash(x) handlers
+     * Relies on inbuilt double -> long (bits) -> hash(x) handlers
      */
-    default long hash(T value)
+    default long hash(double value)
     {
-        return MurmurHash.hash(value);
+        return MurmurHash.hashLong(Double.doubleToLongBits(value));
     }
 
     /**
      * Retrieve estimated frequency of value
      */
     @Override
-    default long get(T value)
+    default long get(double value)
     {
         return getHashed(hash(value));
     }
