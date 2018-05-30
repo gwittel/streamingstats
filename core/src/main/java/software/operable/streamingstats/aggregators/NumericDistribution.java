@@ -28,7 +28,7 @@ public interface NumericDistribution
 
     /**
      * Merge another NumericDistribution INTO the current instance
-     * @param other
+     *
      * @return The mutated {@code NumericDistribution} object
      */
     NumericDistribution mergeWith(NumericDistribution other);
